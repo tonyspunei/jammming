@@ -5,6 +5,8 @@ import { SearchBar } from "../SearchBar/SearchBar";
 import { SearchResults } from "../SearchResults/SearchResults";
 import { Playlist } from "../Playlist/Playlist";
 
+import { Spotify } from "../../util/Spotify";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -61,7 +63,7 @@ class App extends React.Component {
   }
 
   addTrack(track) {
-    console.log(this.addTrack)
+    console.log(this.addTrack);
     let tracks = this.state.playlistTracks;
     if (tracks.find((savedTrack) => savedTrack.id === track.id)) {
       return;
@@ -72,7 +74,7 @@ class App extends React.Component {
   }
 
   removeTrack(track) {
-    console.log("remove track")
+    console.log("remove track");
     let tracks = this.state.playlistTracks;
     tracks = tracks.filter((currentTrack) => currentTrack.id !== track.id);
     this.setState({ playlistTracks: tracks });
@@ -83,11 +85,13 @@ class App extends React.Component {
   }
 
   savePlaylist() {
-    const trackUris = this.state.playlistTracks.map(track => track.uri);
+    const trackUris = this.state.playlistTracks.map((track) => track.uri);
   }
 
   search(searchTerm) {
-    console.log(searchTerm)
+    Spotify.search(searchTerm).then((searchResults) => {
+      this.setState({ searchResults: searchResults });
+    });
   }
 
   render() {
