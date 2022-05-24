@@ -24,8 +24,7 @@ export class Track extends React.Component {
   }
 
   removeTrack() {
-    const currentTrack = this.props.track;
-    this.props.onRemove(currentTrack);
+    this.props.onRemove(this.props.track);
   }
 
   render() {
