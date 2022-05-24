@@ -30,6 +30,27 @@ class App extends React.Component {
           id: 3,
         },
       ],
+      playlistName: "Any string",
+      playlistTracks: [
+        {
+          name: "La Pieptul Meu",
+          artist: "Sebastian Dobrincu",
+          album: "Single",
+          id: 1
+        },
+        {
+          name: "Halfway to the Moon",
+          artist: "Sebastian Dobrincu",
+          album: "Single",
+          id: 2
+        },
+        {
+          name: "On Your Mind (Albwho Remix)",
+          artist: "Sebastian Dobrincu",
+          album: "Single",
+          id: 3
+        },
+      ]
     };
   }
 
@@ -43,7 +64,7 @@ class App extends React.Component {
           <SearchBar />
           <div className="App-playlist">
             <SearchResults searchResults={this.state.searchResults} />
-            <Playlist />
+            <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} />
           </div>
         </div>
       </div>
