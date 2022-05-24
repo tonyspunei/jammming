@@ -12,47 +12,9 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      searchResults: [
-        {
-          name: "Without Me",
-          artist: "Eminem",
-          album: "The Eminem Show",
-          id: 1,
-        },
-        {
-          name: "Till I Collapse",
-          artist: "Eminem",
-          album: "The Eminem Show",
-          id: 2,
-        },
-        {
-          name: "The Real Slim Shady",
-          artist: "Eminem",
-          album: "The Marshall Mathers LP",
-          id: 3,
-        },
-      ],
+      searchResults: [],
       playlistName: "Any string",
-      playlistTracks: [
-        {
-          name: "La Pieptul Meu",
-          artist: "Sebastian Dobrincu",
-          album: "Single",
-          id: 1,
-        },
-        {
-          name: "Halfway to the Moon",
-          artist: "Sebastian Dobrincu",
-          album: "Single",
-          id: 2,
-        },
-        {
-          name: "On Your Mind (Albwho Remix)",
-          artist: "Sebastian Dobrincu",
-          album: "Single",
-          id: 3,
-        },
-      ],
+      playlistTracks: [],
     };
 
     this.addTrack = this.addTrack.bind(this);
@@ -63,7 +25,6 @@ class App extends React.Component {
   }
 
   addTrack(track) {
-    console.log(this.addTrack);
     let tracks = this.state.playlistTracks;
     if (tracks.find((savedTrack) => savedTrack.id === track.id)) {
       return;
@@ -86,6 +47,12 @@ class App extends React.Component {
 
   savePlaylist() {
     const trackUris = this.state.playlistTracks.map((track) => track.uri);
+    Spotify.savePlayList(this.state.trackUris).then(() => {
+      this.setState({
+        playlistName: "New Playlist",
+        playlistTracks: [],
+      });
+    });
   }
 
   search(searchTerm) {
